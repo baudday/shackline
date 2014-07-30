@@ -35,9 +35,9 @@ getFrames()
 
 # Subtract background
 i = 0
-fgbg = cv2.createBackgroundSubtractorMOG2()
+fgbg = cv2.createBackgroundSubtractorMOG2(12, 40, False)
 for i in range(0, FRAME_COUNT):
-  frame = cv2.imread(FRAME_LOC + `i` + FRAME_FORMAT)
+  frame = cv2.bilateralFilter(cv2.imread(FRAME_LOC + `i` + FRAME_FORMAT), 9, 100, 100)
   fgmask = fgbg.apply(frame)
 
   # Cropped image with people isolated
